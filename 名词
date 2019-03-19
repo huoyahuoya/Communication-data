@@ -1,0 +1,39 @@
+GSM:全球移动通信系统Global System for Mobile Communication，是当前应用最为广泛的移动电话标准。
+
+CDMA:(码分多址)Code Division Multiple Access，是在数字技术的分支--扩频通信技术上发展起来的一种崭新而成熟的无线通信技术。
+
+WCDMA：宽带码分多址（英语：Wideband Code Division Multiple Access，常简写为W-CDMA）是一种3G蜂窝网络，使用的部分协议与2G GSM标准一致。
+
+TD-SCDMA:时分-同步码分多址（英语：Time Division - Synchronous Code Division Multiple Access，缩写为：TD-SCDMA），融合后亦称UMTS TDD LCR，是ITU（国际电信联盟）批准的多个3G移动通信标准中的一个。
+
+UMTS：UniversalMobileTelecommunicationSystem是欧洲的3G名称，概念提出较早。欧洲试图在3GPP采用这一名称，但由于其他国家的标准化组织没有同意，所以没有采用。但欧洲的国家和公司仍然采用此名称，含义是指3GPP定义的无线和网络标准的统称，而且多数情况下只是指WCDMA。
+
+3GPP：该标准目标是实现由2G网络到3G网络的平滑过渡，保证未来技术的后向兼容性，支持轻松建网及系统间的漫游和兼容性。 其职能： 3GPP主要是制订以GSM核心网为基础，UTRA(FDD为W-CDMA技术，TDD为TD-CDMA技术)为无线接口的第三代技术规范。
+
+IMSI：国际移动用户识别码（International Mobile Subscriber Identification Number）是区别移动用户的标志，储存在SIM卡中，可用于区别移动用户的有效信息。其总长度不超过15位，同样使用0~9的数字。
+IMSI是15位的十进制数。
+其结构如下：IMSI=MCC(3)+MNC(2)+MSIN(10)
+
+
+MCC：
+	Mobile Country Code，移动国家码，MCC的资源由国际电信联盟（ITU）在全世界范围内统一分配和管理，唯一识别移动用户所属的国家，共3位，中国为460。
+MNC:（Mobile Network Code，移动网络号码）：
+	用于识别移动用户所归属的移动通信网，2~3位。在同一个国家内，如果有多个PLMN（Public Land Mobile Network，公共陆地移动网，一般某个国家的一个运营商对应一个PLMN），可以通过MNC来进行区别，即每一个PLMN都要分配唯一的MNC。中国移动系统使用00、02、04、07，中国联通GSM系统使用01、06、09，中国电信CDMA系统使用03、05、电信4G使用11，中国铁通系统使用20。
+MSIN:
+	Mobile Subscriber Identification Number，移动用户识别号码,用以识别某一移动通信网中的移动用户。共有10位，其结构如下：
+	EF+M0M1M2M3+ABCD
+	其中，EF由运营商分配；M0M1M2M3和
+	MDN（Mobile Directory Number，移动用户号码簿号码）中的H0H1H2H3可存在对应关系；ABCD：四位，自由分配。
+
+MDN：Mobile Directory Number，移动用户号码簿号码MDN号码为本网移动用户作被叫时，主叫用户所需拨的号码。
+	MDN号码的结构如下：
+	CC + MAC + H0 H1 H2 H3 + ABCD其中：
+	CC：是国家码，中国使用86。
+	MAC：是移动接入码，本网采用网号方案，为133。
+	H0H1H2H3：HLR识别码，由联通总部统一分配。
+	ABCD：移动用户号，由各HLR自行分配。
+	MDN：分布系统
+
+HLR:HLR的英文全称为Home Location Register，中文含义为归属位置寄存器，它是一个负责移动用户管理的数据库，永久存储和记录所辖区域内用户的签约数据，并动态地更新用户的位置信息，以便在呼叫业务中提供被呼叫用户的网络路由。归属位置寄存器（HLR）是系统的数据中心，它存储着所有在该HLR签约移动用户的位置信息、业务数据和账户管理等信息，并可实时地提供对用户位置信息的查询和修改，及实现各类业务操作，包括位置更新、呼叫处理、鉴权和补充业务等，完成移动通信网中用户的移动性管理。
+
+VLR:英文全称为Visitor Location Register，中文含义为拜访位置寄存器，它是一个动态数据库，存储所管辖区域中MS（统称拜访客户）的来话、去话呼叫所需检索的信息以及用户签约业务和附加业务的信息，例如客户的号码，所处位置区域的识别，向客户提供的服务等参数。在网络中VLR都是与MSCS合设，协助MSCS记录当前覆盖区域内的所有移动用户的相关信息。
