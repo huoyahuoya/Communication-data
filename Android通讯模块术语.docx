@@ -1,0 +1,297 @@
+﻿通讯相关的术语
+基本术语
+IMEI：International Mobile Equipment Identity是国际移动设备身份码的缩写，国际移动装备辨识码，是由15位数字组成的"电子串号"，它与每台移动电话机一一对应，而且该码是全世界唯一的，手机通过拨号盘输入*#06#查询
+ 
+IMSI: International Mobile Subscriber Identification Number国际移动用户识别码。是区别移动用户的标志，储存在SIM卡中，可用于区别移动用户的有效信息。其总长度不超过15位，同样使用0~9的数字。IMSI是15位的十进制数。其结构如下：MCC+MNC+MSIN
+ 
+ICCID：Integrate circuit card identity 集成电路卡识别码即SIM卡卡号，相当于手机号码的身份证。 ICCID为IC卡的唯一识别号码，共有20位数字组成，其编码格式为：XXXXXX 0MFSS YYGXX XXXXX。分别介绍如下： 前六位运营商代码：中国移动的为：898600；898602 ，中国联通的为：898601、898609，中国电信898603，898606。
+ 
+PLMN：Public Land Mobile Network，公共陆地移动网络，PLMN = MCC + MNC，客户会提出更新plmn list，即更新网络参数apns-conf.xml
+ 
+UA：User Agent用户代理它是一个特殊字符串头，使得服务器能够识别客户使用的操作系统及版本、CPU 类型、浏览器及版本、浏览器渲染引擎、浏览器语言、浏览器插件等。可以通过在浏览器中输入http://202.58.121.191/headers.jsp查询
+ 
+SIM：subscriber identity module”，即用户身份模块
+USIM：Universal Subscriber Identity Module（全球用户识别卡）的缩写。全球用户身份模块(USIM)，也叫做升级 SIM ，是在 UMTS 3G 网络的一个构件。
+为了满足更小的手机空间要求，SIM卡也经历了ID1（有一张银行卡那么大）、全尺寸SIM、Mini-SIM、Micro-SIM、Nano-SIM的演变
+ 
+手机网络制式：GSM、CDMA、3G、4G
+中国移动目前使用的GSM(2G)/TD-SCDMA(3G)/TDD-LTE(4G)这3模；
+中国联通使用的是GSM(2G)/WCDMA(3G)/TD-LTE(4G)/FDD-LTE(4G)；
+中国电信则使用的是CDMA1X(2G)/EVDO(3G)/TD-LTE(4G)/FDD-LTE(4G)。
+对于国内的运营商来说，只要达到7模即GSM/TD-SCDMA/WCDMA/TD-LTE/FDD-LTE/CDMA1X/EVDO即可称之为全网通机型。
+ 
+频段：手机有两(双)频，三频，四频之分
+双频GSM/GPRS (900/1800)
+三频GSM/GPRS (900/1800/1900)
+四频GSM/GPRS (850/900/1800/1900)
+CDMA的网络制式（800/1900）
+800Hz在中国现在使用 ，1900Hz现在美国使用的！
+ 
+TDD-LTE是时分双工，即发射和接收信号是在同一频率信道的不同时隙中进行的；
+FDD-LTE是频分双工，即采用两个对称的频率信道来分别发射和接收信号
+ 
+SAR：Specific Absorption Ratio 比吸收率，指单位时间内单位质量的物质吸收的电磁辐射能量。国际上通常使用SAR值来衡量终端辐射的热效应。手机辐射就是靠SAR值来衡量的。华勤手机通过拨号盘输入*#07#查询
+ 
+VNO：虚拟运营商Virtual Network Operator，是指拥有某种或者某几种能力（如技术能力、设备供应能力、市场能力等）与电信运营商在某项业务或者某几项业务上形成合作关系的合作伙伴，电信运营商按照一定的利益分成比例，把业务交给虚拟运营商去发展
+ 
+漫游：手机专业术语中的漫游与我们日常生活中的“省内漫游”，“全国漫游”不是一回事。这里的漫游，是指手机使用一个运营商的SIM卡，注册上另一个运营商的网络。判定是否漫游，是通过比较sim卡的PLMN与注册上网络的PLMN，不会去check是本地卡还是异地卡。
+ 
+IPV4：IP是TCP/IP协议族中网络层的协议，IP协议的版本号是4简称IPV4，IPV4中规定IP地址长度为32
+IPV6：是下一版本的互联网协议，IPV6采用128位地址长度
+ 
+Volte：VoLTE即Voice over LTE，基于IMS的语音业务，是一种IP数据传输技术，无需2G/3G网，全部业务承载于4G网络上，可实现数据与语音业务在同一网络下的统一。
+ 
+4G+: “天翼4G+”是中国电信利用国际前沿的载波聚合（Carrier Aggregation，简称CA）技术
+CA
+ 
+C2K：C2K是CDMA2000的简称。MTK目前的平台上支持C2K的Chip有MT6735、MT6753等等，因为有加入对C2K的支持，所以针对Telephony Framework有做修改，修改以后的架构称为SVLTE。
+ 
+射频校准：校准是为了是RF的收发性能达到一个最好的状态，由于PCB的布局和布线在不同单板都是不一样的，所以不同单板都需要做校准重新调节参数来匹配通道
+ 
+音频参数：音频相关的参数调节，比如听筒，耳机，喇叭等，需要硬件音频工程师配合修改
+ 
+APN：Access Point Name 手机上网时必须配置的一个参数，它决定了手机通过哪种接入方式来访问网络，通过修改apns-conf.xml文件来配置网络参数，网络参数中各字段的含义
+字段名
+数据类型
+表示含义
+_id
+INTEGER PRIMARY KEY
+name
+TEXT
+显示的名称
+numeric
+TEXT
+mcc+mnc
+mcc
+TEXT
+Mobile Country Code，移动国家码，3位
+mnc
+TEXT
+Mobile Network Code，移动网络码，2位或者3位
+apn
+TEXT
+接入点
+user
+TEXT
+用户名
+server
+TEXT
+服务
+password
+TEXT
+密码
+proxy
+TEXT
+代理
+port
+TEXT
+端口
+mmsproxy
+TEXT
+短信代理
+mmsport
+TEXT
+短信端口
+mmsc
+TEXT
+彩信交换服务器
+authtype
+INTEGER
+身份验证类型0：none 1：PAP（未加密的密码身份验证） 2：CHAP（质询握手身份验证协议） 3：PAP or CHAP
+type
+TEXT
+APN接入类型五种优先级由低到 高(default/mms（彩信专用连接）/supl（Secure User Plane Location安全用户面定位）/dun（Dial Up Networking拨号网络）/hipri)
+current
+INTEGER
+1：显示 0:不显示
+sourcetype
+INTEGER
+默认值为0
+csdnum
+TEXT
+
+protocol
+TEXT
+网络数据交换规则，IP：IPv4 IPV6：IPv6  IPV4V6：IPv4/IPv6 默认值为IP（因特网协议） 
+roaming_protocol
+TEXT
+漫游网络数据交换规则，默认值为IP（因特网协议）
+omacpid
+TEXT
+
+napid
+TEXT
+
+proxyid
+TEXT
+
+carrier_enabled
+BOOLEAN
+默认为1
+bearer
+INTEGER
+承载：一条核心网到UE的逻辑通路（14：LTE 13：eHRPD 0：Unspecified）默认为0
+spn
+TEXT
+Service Provider Name 运营商名称
+imsi
+TEXT
+International Mobile Subscriber Identification Number（国际移动用户识别码）MCC+MNC+MSIN（移动用户识别号码10位）共15位
+pnn
+TEXT
+
+ppp
+TEXT
+PPP拨号服务号码
+mvno_type
+TEXT
+Mobile Virtual Network Operator虚拟网络运营商类型（“ ”，spn，imsi，gid四种类型，不写为空）
+mvno_match_data
+TEXT
+
+LOG相关
+Android Log即AP Log。
+MainLog即Android Log中main.log。
+Radio Log即Android Log中radio.log。
+EventsLog即AndroidLog中的events.log。
+System Log即Android Log中的system.log。
+Kernel Log即AndroidLog中的kernel.log。
+ 
+Modem Log即MDlog。mdlog1为移动联通卡的modem相关LOG，mdlog3为电信卡的modem相关LOG，通信相关的问题必须要有modem log，例如遇到电话、彩信、WAP不通时，此LOG是必须的
+ 
+Slog即展讯自研的抓取AndroidLog的功能
+1. 在拨号键盘中输入*#*#83781#*#*，进入工程模式界面。 
+2. 选择“Debug&Log”标签，点击“Slog”，可进入Slog界面。
+ 
+Mtklog即MTK自研的抓取AndroidLog的功能
+1. 在拨号键盘中输入*#*#3646633#*#*，进入工程模式界面。 
+2. 选择“Log and Debugging”标签，点击“MTKLogger”，可进入MTKLoger界面。
+ 
+通话相关
+MO：Mobile Origination Call 主叫，对应呼出
+MT：Mobile Termination Call 被叫，对应呼入
+ 
+通话状态介绍：IDLE  空闲状态，没有任何活动
+                       OFFHOOK  摘机状态，至少有个电话活动。
+                       RINGING  来电状态，电话铃声响起的那段时间或正在通话又来新电，新来电话不得不等待的那段时间。
+Modem相关
+nvitem：NV数据、射频、网络等信息；具体保存在nvitem.bin中
+
+MODEM：Modulator（调制器）与Demodulator（解调器）的简称，也就是说MODEM代码就是烧在基带芯片中的，用来控制和管理基带功能。具体保存形式在Modem.bin中，如下图所示
+展讯Modem是封装好的bin，具体可以分为CP0和CP2
+CP0：主要负责通话、数据相关业务
+CP2：WIFI、蓝牙之类业务
+
+AT指令： AT 即Attention,AT指令一般应用于终端设备与PC应用之间的连接与通信。
+
+AP：Application Processor，即应用处理器，可以把AP看作计算机，AP上运行了操作系统和应用软件，我们平时说的某某手机双核就是指AP。
+ 
+BP：Baseband Processor，即基带处理器，可以把BP看作计算机的无线MODEM，这个无线modem通过AT接口（相当于计算机和调制解调器之间的接口，但各厂家都有扩展命令）提供通话、短消息、上网、USIM卡等功能。
+ 
+RRM：Radio Resource Management ，无线资源管理管理无线接口，包括信道的配置、传输的模式、上下行电平及通信质量的测量、切换的操作等。
+ 
+MM：(移动性管理)主要是建立在RRM上用于处理移动安全性和安全保密性的功能组
+ 
+功能相关
+Sales Track：销量统计，统计客户手机销量情况的应用，用户第一次开机会向客户服务器发送一条消息，信息内容包括：手机型号，手机IMEI号，软件版本号等信息，此应用不开放给用户
+ 
+小区广播：是通过小区广播信道（CBCH）将信息（如地理位置、天气状况等信息）传到手机，再由用户选择接收的一种功能，通过此功能可向用户提供位置信息，天气预报等服务。印度客户会要求添加默认小区广播频道50。
+ 
+ECC：emergency call 紧急拨号号码，中国地区110，119，114等，国外客户要求提前添加相应的紧急号码
+ 
+IP call：IP拨号是一种快捷方式，通常在手机里出现，其次是电脑，电话。IP拨号就是通过接入数据网络来传播语音信息。如果是在手机电话中出现的话，那么设置其IP拨号同时可达到省钱的目的。国外客户要求去除此功能。
+ 
+Auto call record：自动通话录音，接通电话时自动录音，印度客户会要求修改通话录音文件名字的格式
+ 
+Flip to silence：翻转静音功能，手机来电通过翻转手机静音
+ 
+Speed dial：快速拨号，在拨号盘除了号码1以外的其他数字可以保存紧急联系人号码，长按拨号盘对应数字可以进行对相应联系人的呼叫。
+ 
+Call forwarding：呼叫转移是将来电转接到其他电话上的一种功能，需要运营商支持和开通，并非所有SIM/USIM卡都有此项功能，转移的号码可以是手机号码也可以是固定电话号码，具体包括：
+Always forward：无条件呼叫转移，即任意来电都将被转移到设置好的好马上去
+Forward when busy：遇忙呼叫转移，若电话正在通话中，再呼入一路电话，这路电话将被转移到设置好的电话号码上去
+Forward when unanswered：无应答呼叫转移，若来电无应答，一段时间（由网络段决定这个时间段的长短，一般是25秒左右）后，电话将被转移到设置好的电话号码上去
+ 
+Call waiting：呼叫等待，此项功能需要运营商支持并开通，一般卡都支持此项功能并且运营商默认开通，一般手机在callsetting里面会有一项打开或关闭此项功能的选项，用户可以自由选择。如用户设置了呼叫等待，则可实现在通话时，若有第三方呼入，会有提示音和提示画面，此时可以选择接听，拒绝或是忽略该呼叫。如果选择接听第三方来电，则原通话将会被保持而不会被挂断，当然也可以选择接听并挂断原通话。如果拒绝，则会挂断第三方通话，原通话不受影响。
+Vibration for call connection：接听震动，接听电话的瞬间震动提醒
+STK：Sim toolkit，sim/usim卡上的程序在Android手机上，在众多图标中会有一个sim卡应用图标，点击后进入会看到一个主菜单中，有类似品牌信息，发短信，网上营业厅选项等等，菜单内容根据运营商的不同也不完全一样。
+号码匹配：即判断两组号码是否属于同一个号码，我们会根据各个国家的号码情况修改号码匹配的位数，拨号盘输入的号码与联系人中保存的后7位匹配，则号码匹配的位数为7位。
+SIM LOCK：只允许特定网络可以使用这种手机，其他运营商的网络无法使用。如果是移动定制的锁网机，无法插联通的卡
+入库相关
+入库：国内三大运营商对产品库产品要求进行入库测试，包括移动入库，联通入库，电信入库，其中移动入库为三轮，电信入库为两轮
+CTA：国家对接入公用电信网使用的电信终端设备、无线电通信设备和涉及网间互换的电信设备实行进网许可制度。电信设备必须获得进网许可证；未获得进网许可证的，不得接入公用电信网使用和在国内销售。
+电信自注册：电信入库要求的一项测试项，包括短信自注册和数据域自注册，具体需求如附图 
+ 
+协议相关
+A 
+AICH 
+Acquisition Indicator Channel 
+接入指示信道 
+B 
+BCCH 
+Broadcast Control CHannel 
+广播控制信道 
+BCH 
+Broadcast Channel 
+广播信道 
+BFN 
+NodeB Frame Number Counter 
+NodeB帧号计数器 
+BMC 
+Broadcast/Multicast Control protocol 
+广播/多播控制协议 
+BSC 
+Base Station Controller 
+基站控制器 
+BSS 
+Base Station Subsystem 
+基站子系统 
+C 
+CA-ICH 
+Channel assignment indication channel 
+信道分配指示信道 
+CBC 
+CellBroadcastCenter 
+小区广播中心 
+CBS 
+Cell Broadcast Service 
+小区广播业务 
+CC 
+Call Control 
+呼叫控制 
+CCCH 
+Common Control Channel 
+公共控制信道 
+CCH 
+Common transport channel 
+公共传输信道 
+CN 
+Core Network 
+核心网络 
+CPICH 
+Common Pilot Channel 
+公共导频信道 
+CRC 
+Cyclic Redundancy Check 
+循环冗余校验（法） 
+CRNC 
+Controlling RNC 
+控制RNC 
+C-RNTI 
+Cell Radio Network Temporary Identifier 
+小区无线网络临时标识 
+CS 
+Circuit-Switched 
+电路交换 
+D 
+DCCH 
+Dedicated Control CHannel 
+专用控制信道 
+DCH 
+Dedicated CHannel 
+专用信道 
+DPCCH 
+Dedicated Physical Control 
+专用物理控制信道 
+ 
+
