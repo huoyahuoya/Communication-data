@@ -34,6 +34,45 @@ MDN：Mobile Directory Number，移动用户号码簿号码MDN号码为本网移
 	ABCD：移动用户号，由各HLR自行分配。
 	MDN：分布系统
 
+MS:Moblie Station 移动台。
+
+BTS：Base Transceiver Station,基站收发信机。
+
+BSC：Base Station Controller,基站控制器。
+
+BSS：Base Stasion Subsystem,基站子系统。
+
+MSC：Mobile Switching Center，移动交换中心。
+
+OMC：Operation & Maintenance Center，操作和维护中心。
+
+PSTN：Public Switched Telephone Network，公共电话交换机。
+
 HLR:HLR的英文全称为Home Location Register，中文含义为归属位置寄存器，它是一个负责移动用户管理的数据库，永久存储和记录所辖区域内用户的签约数据，并动态地更新用户的位置信息，以便在呼叫业务中提供被呼叫用户的网络路由。归属位置寄存器（HLR）是系统的数据中心，它存储着所有在该HLR签约移动用户的位置信息、业务数据和账户管理等信息，并可实时地提供对用户位置信息的查询和修改，及实现各类业务操作，包括位置更新、呼叫处理、鉴权和补充业务等，完成移动通信网中用户的移动性管理。
 
 VLR:英文全称为Visitor Location Register，中文含义为拜访位置寄存器，它是一个动态数据库，存储所管辖区域中MS（统称拜访客户）的来话、去话呼叫所需检索的信息以及用户签约业务和附加业务的信息，例如客户的号码，所处位置区域的识别，向客户提供的服务等参数。在网络中VLR都是与MSCS合设，协助MSCS记录当前覆盖区域内的所有移动用户的相关信息。
+
+AuC：Authentication Center，鉴权中心。
+
+操作维护链路（OML）：此链路用于连接OMCR 与BSC。使用LAPB/X.25协议来进行软件加载，配置更改，故障/事件管理和基站系统的性能管理。
+编译码器基站链路（XBL）：这条链路在BSC和RXCDR之间，使用LAPD协议连接，它提供RXCDR和BSC之间的故障管理。BSC将处理从XBL链路传来的信息，并在必要的情况下，把这些信息经MTL传送到MSC。MSCBSC 移动通信论坛1O8m+n5e0|
+消息传输链路（MTL）：这条链路连接于BSC 和MSC之间，MTL使用C7协议（MTL，SCCP，BSSAP），它提供了BSC—MSC、MSC—MS之间的所有控制信息。
+无线信令链路（RSL）：这条链路连接于BSC与它控制的各个BTS之间。RSL使用LAPD协议，给BSC和相连的每个BTS站之间提供控制信息，并把信息从MSC送到MS。
+小区广播链路（CBL）：此链路连接于BSC和小区广播中心（CBC）之间。CBL使用LAPD/X.25协议，它常用来传送从GSM网络外到BSC的短消息服务小区广播信息
+
+TCH：Traffic Channel，业务信道。
+BCH：Broadcast Channel，广播信道。
+CCH：Control Channel，控制信道。
+以上三个信道，解决了三个问题：（1）MS发现BTS（2）BTS发现MS（3）BTS的切换
+
+CI：Cell Identity，小区标识。
+LAC：Location Area Code，位置区域码。
+BSIC：Base Station Identity Code，基站标识码。
+
+BCH
+|——BCCH：Broadcast Control Channel，广播控制信号——MS不断搜索，知道与BTS建立连接，获取CI、LAC。
+|——FCH：Frequency Correction Channel，频率校正信道——校准频率，准备执行通讯。
+|——SCH：Synchronization Channel，同步信道——同步，时间上保持一致，并获到BSIC码，获得基站信息。
+
+CRC：Cyclic Redundancy Check，循环亢余校验。
+
