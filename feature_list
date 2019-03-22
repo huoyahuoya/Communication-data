@@ -1,0 +1,46 @@
+Radio LTE：4G
+Radio 2G：2G
+Radio 3G：3G
+Core Network：核心网是电信网的核心部分，为接入网互联的用户提供多种服务。它的关键功能是通过公共交换电话网直接拨打电话。
+IMS Core (P-CSCF etc.)：所有IP通信服务的基础技术。
+Telephony Application Server：电话应用服务器（tas），有时在电话上下文中仅称为应用服务器（as），是电信网络运营商核心网络中用于提供电话应用和附加多媒体功能的组件。
+ePDG：Evolevd Packet Data Gateway,演进型分组数据网关
+Home PLMN (MCC/MNC)：（Public Land Mobile Network--公共陆地移动/通信 网络）。
+Other PLMN (MCC/MNC) where IMS should be enabled.：
+⑴RPLMN:(Registered PLMN 已登记PLMN）：已登记PLMN。是终端在上次关机或脱网前登记上的PLMN。
+⑵EPLMN/EHPLMN: 
+Equivalent PLMN 等效PLMN:为与终端当前所选择的PLMN处于同等地位的PLMN，其优先级相同。
+EquivalentHome PLMN 等效本地PLMN:为与终端当前所选择的PLMN处于同等地位的本地PLMN。
+⑶HPLMN: Home PLMN 归属PLMN,为终端用户归属的PLMN。也就是说，终端USIM卡上的IMSI号中包含的MCC和MNC与HPLMN上的MCC和MNC是一致的，对于某一用户来说，其归属的PLMN只有一个。
+⑷UPLMN: User Controlled PLMN 用户控制PLMN:是储存在USIM卡上的一个与PLMN选择有关的参数。
+⑸OPLMN: Operator Controlled PLMN 运营商控制PLMN：是储存在USIM 卡上的一个与PLMN选择有关的参数。
+⑹VPLMN: Visited PLMN 访问PLMN:为终端用户访问的PLMN。其PLMN和存在SIM卡中的IMSI的MCC，MNC是不完全相同的。当移动终端丢失覆盖后，一个VPLMN将被选择。
+⑺其他的PLMN: 
+⑻FPLMN:Forbidden PLMN禁用PLMN,为被禁止访问的PLMN，通常终端在尝试接入某个PLMN被拒绝以后，会将其加到本列表中。
+⑼APLMN:Approve PLMN 可捕获PLMN,为终端能在其上找到至少一个小区，并能读出其PLMN标识信息的PLMN。
+MCC：Mobile Country Code，移动国家码，MCC的资源由国际电联（ITU）统一分配和管理，唯一识别移动用户所属的国家，共3位，中国为460; 
+MNC是Mobile Network Code是英文缩写，指移动网络号码，用于识别移动客户所属的移动网络，2~3位数字组成。
+SPN：为了统一状态栏的显示，后面也将PLMN的名字进行了转换。PLMN可以理解为运营商名字，是真正注册上的网络的名字， SPN是Sim卡真正所属的运营商的名字。比如：中国移动注册中国移动的网络，那么PLMN=SPN=中国移动中国移动注册中国联通的网络，那么PLMN=中国联通； SPN=中国移动具体显示详情还要根据Sim卡的配置来决定。
+GID1：组标识符（级别1）
+GID2：组标识符（级别2）
+IMSI：国际移动用户识别码（IMSI：International Mobile Subscriber Identification Number）是区别移动用户的标志，储存在SIM卡中，可用于区别移动用户的有效信息
+
+
+
+ViLTE (Video over LTE)：是高清视频通话，是VoLTE的扩展，其增强了语音服务。VoLTE是部署 ViLTE 的前提。
+ViWiFi (Video over WiFi)：Vowi-Fi是Volte的一种补充技术，利用IMS技术提供通过Wi-Fi网络通过IP传输的分组语音服务。在可能的情况下，Volte呼叫可以在LTE和Wi-Fi之间无缝切换，反之亦然。会话视频也可以通过Wi-Fi（参见Vilte）实现。
+VoLTE（Voice over LTE）:是基于 IP 的数据传输技术，通话和数据业务都承载在 4G 网络，在打电话的同时也可以上网。VoLTE 还可以带给您更短的接通等待时间、更高质量和更自然的语音视频通话效果。
+Allow video call when mobile data off：关闭移动数据时允许视频呼叫
+CVO：
+video_media_profile_mode：视频媒体简介模式
+H.264 resolution：分辨率
+H.264 profile level：版本
+H.264 min frame rate ：最小帧速率
+H.264 max frame rate：最大帧速率	
+H.264 min bit rate ：最小比特率
+H.264 max bit rate：最大比特率
+H.265：H.264由MPEG、VCEG开发格式类型视频压缩格式扩展自H.263，MPEG-4视频，延伸至H.265/HEVC
+https://en.wikipedia.org/wiki/H.264/MPEG-4_AVC#Naming
+Video telephony for emergency call：紧急呼叫视频电话
+Video telephony for conference call：电话会议的视频电话
+Video capability handling when mobile data is disabled：禁用移动数据时的视频处理能力
