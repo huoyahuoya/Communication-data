@@ -1,3 +1,4 @@
+[Network Infrastructure]
 Radio LTE：4G
 Radio 2G：2G
 Radio 3G：3G
@@ -5,6 +6,8 @@ Core Network：核心网是电信网的核心部分，为接入网互联的用�
 IMS Core (P-CSCF etc.)：所有IP通信服务的基础技术。
 Telephony Application Server：电话应用服务器（tas），有时在电话上下文中仅称为应用服务器（as），是电信网络运营商核心网络中用于提供电话应用和附加多媒体功能的组件。
 ePDG：Evolevd Packet Data Gateway,演进型分组数据网关
+
+[PLMN (MCC/MNC) of network]
 Home PLMN (MCC/MNC)：（Public Land Mobile Network--公共陆地移动/通信 网络）。
 Other PLMN (MCC/MNC) where IMS should be enabled.：
 ⑴RPLMN:(Registered PLMN 已登记PLMN）：已登记PLMN。是终端在上次关机或脱网前登记上的PLMN。
@@ -18,18 +21,71 @@ EquivalentHome PLMN 等效本地PLMN:为与终端当前所选择的PLMN处于同
 ⑺其他的PLMN: 
 ⑻FPLMN:Forbidden PLMN禁用PLMN,为被禁止访问的PLMN，通常终端在尝试接入某个PLMN被拒绝以后，会将其加到本列表中。
 ⑼APLMN:Approve PLMN 可捕获PLMN,为终端能在其上找到至少一个小区，并能读出其PLMN标识信息的PLMN。
+
+
 MCC：Mobile Country Code，移动国家码，MCC的资源由国际电联（ITU）统一分配和管理，唯一识别移动用户所属的国家，共3位，中国为460; 
 MNC是Mobile Network Code是英文缩写，指移动网络号码，用于识别移动客户所属的移动网络，2~3位数字组成。
-SPN：为了统一状态栏的显示，后面也将PLMN的名字进行了转换。PLMN可以理解为运营商名字，是真正注册上的网络的名字， SPN是Sim卡真正所属的运营商的名字。比如：中国移动注册中国移动的网络，那么PLMN=SPN=中国移动中国移动注册中国联通的网络，那么PLMN=中国联通； SPN=中国移动具体显示详情还要根据Sim卡的配置来决定。
+
+[SIM]
+SPN：为了统一状态栏的显示，后面也将PLMN的名字进行了转换。PLMN可以理解为运营商名字，是真正注册上的网络的名字，SPN是Sim卡真正所属的运营商的名字。
+	比如：中国移动注册中国移动的网络，那么PLMN=SPN=中国移动中国移动注册中国联通的网络，那么PLMN=中国联通； SPN=中国移动具体显示详情还要根据Sim卡的配置来决定。
 GID1：组标识符（级别1）
 GID2：组标识符（级别2）
 IMSI：国际移动用户识别码（IMSI：International Mobile Subscriber Identification Number）是区别移动用户的标志，储存在SIM卡中，可用于区别移动用户的有效信息
 
+[Radio Feature]
+SRVCC:Single Radio Voice Call Continuity(单次无线电语音呼叫连续性),是3GPP提出的一种VoLTE语音业务连续性方案，主要是为了解决当单射频UE 在LTE/Pre-LTE 网络和2G/3G CS 网络之间移动时，如何保证语音呼叫连续性的问题.
+	即:保证单射频UE 在IMS 控制的VoIP 语音和CS 域语音之间的平滑切换。
+	VoIP：基于IP的语音传输（英语：Voice over Internet Protocol，缩写为VoIP）是一种语音通话技术，经由网际协议（IP）来达成语音通话与多媒体会议，也就是经由互联网来进行通信。
+	CSFB：Circuit Switched Fallback（电路域回落），CSFB技术适用于2G/3G电路域与TD-LTE的无线网络重叠覆盖的场景，网络结构简单，不需要部署IMS系统，能有效利用现有CS网络投资;SRVCC技术适用于运营商已部署IMS网络，在TD-LTE网络已经能提供基于IMS的语音业务，但TD-LTE没有达到全网覆盖的场景;TD-LTE/TD-SCDMA/GSM(GPRS)多模双待终端可选择TD-SCDMA/GSM模式建立语音业务，选择PS域当前附着的网络建立分组域业务，对网络没有额外要求，但终端实现比较复杂。
+
+asrvcc：振铃态srvcc，振铃和通话建立间发生；
+bsrvcc：振铃前srvcc，振铃前发生；
+esrvcc，通话态srvcc，通话过程中；
+mid-call srvcc：属于3方通话过程中发生的，指的是主、被叫编码方式不一致时通过编码list进行中间过渡的过程
+
+[Registration]
+APN:Access Point Name,APN指一种网络接入技术，是通过手机上网时必须配置的一个参数，它决定了手机通过哪种接入方式来访问网络。
+APN for IMS:
+APN for internet
+IP version (v4 or v6) in roaming NW for Internet APN:IMS APN漫游控制
+PDN connectivity to be established during initial LTE attach：
+	需要指定LTE连接过程中应建立哪些PDN连接。
+	-IMS APN的PDN
+	-用于Internet APN的PDN
+	如果选择了“PDN for IMS APN”，则通过LTE附加程序建立“APN for IMS”的PDN。
+	如果选择“Internet APN的PDN”，则通过LTE连接程序建立“Internet的APN”的PDN。 
+Should UE specify APN during initial LTE attach：
+	在初始LTE连接期间，UE应该指定APN吗？
+	如果用户没有指定附加APN，根据AOSP，它将选择IA类型APN或默认类型APN进行初始附加。注：IA类型APN可能为空APN。
+	如果选择了“ue should specify”，则ue将指定apn=>esm将esm信息标志设置为true，并将包含在附加请求中。
+	如果选择了“ue should not specify”，则ue将不指定apn=>esm将把esm信息标志设置为false，并且不会包含在附加请求中。
+	但如果上层显示需要加密的PCO，ESM会将ESM信息标志设置为真。
+Authentication:认证，AKA/Digest，两种UE鉴权方式。
+IPSec：Internet Protocol Security（互联网安全协议 ），是一个协议包，透过对IP协议的分组进行加密和认证来保护IP协议的网络传输协议族（一些相互关联的协议的集合）。
+
+[SIP]
+SIP Transport Protocol:SIP（Session Initiation Protocol，会话初始协议）是由IETF（Internet Engineering Task Force，因特网工程任务组）制定的多媒体通信协议。
+	它是一个基于文本的应用层控制协议，用于创建、修改和释放一个或多个参与者的会话。广泛应用于CS（Circuit Switched，电路交换）、NGN（Next Generation Network，下一代网络）以及IMS（IP Multimedia Subsystem，IP多媒体子系统）的网络中，可以支持并应用于语音、视频、数据等多媒体业务，同时也可以应用于Presence（呈现）、Instant Message（即时消息）等特色业务。可以说，有IP网络的地方就有SIP协议的存在。
+TCP threshold:TCP阈值”（如果数据包大小大于此阈值，则使用TCP。否则，将使用UDP。）
+Preferred URI Type:首选URI类型,SIP和TEL。
+T1 timer、T2 timer、T4 timer、Timer B：（在3gpp TS24.229中，计时器的值定义）。
+SessionExpires (UAC / UAS)：会话扩展（UAC/UAS），SIP协议采用Client/Server模型
+	用户代理（User Agent）是发起或者接收呼叫的逻辑实体。
+	用户代理客户端-UAC（User Agent Client），用于发起请求；
+	用户代理服务器-UAS（User Agent Server），用于接收请求。
+SessionExpires (RefresherMethod INVITE / UPDATE)：
+SIP registration expiry timer：SIP注册到期计时器（3GPP TS24.229）。
+Privacy type：
+Check P-Asserted-Identity header in SIP 380 Alternate Service：
+
+[Call Handing]
 
 
+[Video Telephony ]
+VoLTE（Voice over LTE）:是基于 IP 的数据传输技术，通话和数据业务都承载在 4G 网络，在打电话的同时也可以上网。VoLTE 还可以带给您更短的接通等待时间、更高质量和更自然的语音视频通话效果。
 ViLTE (Video over LTE)：是高清视频通话，是VoLTE的扩展，其增强了语音服务。VoLTE是部署 ViLTE 的前提。
 ViWiFi (Video over WiFi)：Vowi-Fi是Volte的一种补充技术，利用IMS技术提供通过Wi-Fi网络通过IP传输的分组语音服务。在可能的情况下，Volte呼叫可以在LTE和Wi-Fi之间无缝切换，反之亦然。会话视频也可以通过Wi-Fi（参见Vilte）实现。
-VoLTE（Voice over LTE）:是基于 IP 的数据传输技术，通话和数据业务都承载在 4G 网络，在打电话的同时也可以上网。VoLTE 还可以带给您更短的接通等待时间、更高质量和更自然的语音视频通话效果。
 Allow video call when mobile data off：关闭移动数据时允许视频呼叫
 CVO：
 video_media_profile_mode：视频媒体简介模式
@@ -44,3 +100,10 @@ https://en.wikipedia.org/wiki/H.264/MPEG-4_AVC#Naming
 Video telephony for emergency call：紧急呼叫视频电话
 Video telephony for conference call：电话会议的视频电话
 Video capability handling when mobile data is disabled：禁用移动数据时的视频处理能力
+
+[Roaming]
+ViLTE (Video over LTE):vilte视频（LTE）
+ViWiFi (Video over WiFi):viwifi（视频在无线）
+Allow video call when mobile data off:当移动电话允许视频数据的关 
+Video telephony for conference call:telephony视频会议呼叫 
+"Default setting of VoWifi preferred network mode in roaming (VPLMN)":默认设置（vowifi优先模式在漫游网络（vplmn）
