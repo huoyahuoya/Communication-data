@@ -1,0 +1,235 @@
+Function
+Network Infrastructure
+Radio LTE
+Radio 2G
+Radio 3G
+Core Network
+IMS Core (P-CSCF etc.)
+Telephony Application Server
+ePDG
+PLMN (MCC/MNC) of network
+Home PLMN (MCC/MNC)
+Other PLMN (MCC/MNC) where IMS should be enabled.
+SIM 
+SPN
+GID1
+GID2
+IMSI
+Radio Features
+SPN
+GID1
+GID2
+IMSI
+SRVCC to 3G
+SRVCC to 2G
+aSRVCC support 
+bSRVCC support
+mid call SRVCC support
+Registration
+IP version (v4 or v6) for IMS APN
+APN for IMS
+IP version (v4 or v6) for Internet APN
+IP version (v4 or v6) in roaming NW for Internet APN
+APN for internet
+IP version (v4 or v6) for IMS APN
+APN for IMS
+IP version (v4 or v6) for Internet APN
+IP version (v4 or v6) in roaming NW for Internet APN
+APN for internet
+PDN connectivity to be established during initial LTE attach
+Should UE specify APN during initial LTE attach?
+Authentication
+IPSec
+SIP
+SIP Transport Protocol
+"TCP threshold
+(If a packet size is greater than this threshold, TCP is used. Otherwise, UDP is used.)"
+Preferred URI Type 
+T1 timer
+T2 timer
+T4 timer
+Timer B
+SessionExpires (UAC / UAS)
+SessionExpires (RefresherMethod INVITE / UPDATE)
+SIP registration expiry timer
+Privacy type
+Check P-Asserted-Identity header in SIP 380 Alternate Service 
+Call Handling
+Precondition
+Codec
+Supported AMR codec mode
+Supported AMR-WB codec mode
+Supported EVS  Bandwidths
+Supported EVS bit rates in kbps for NB 
+Supported EVS bit rates  in kpbs for WB
+Supported EVS bit rates in kbps for SWB
+SIP Ringing Timer Value
+SIP Ringback Timer Value
+Call Session Timer
+Call waiting
+ePDG Parameters
+ePDG address/FQDN
+
+IKEv2 encryption algorithm
+
+
+
+
+
+IKEv2 PRF algorithms
+
+
+
+IKEv2 authentication algorithms
+
+
+
+ESP encryption algorithms
+
+
+
+
+
+ESP authentication algorithms
+
+
+
+IKEv2 Certificate 
+IKEv2 IDi format
+IKEv2 IDr format
+IKEv2 rekey timer
+IKEv2 DPD (Dead Peer Detection) timer
+IPSec ESP rekey timer
+Attribute type ID for P-CSCF Configuration Attribute
+Voice over WiFi
+VoWifi in airplane mode
+Location support in normal calls on VoWiFi
+Location support in Emergency Calls on VoWiFi
+DSCP Marking for audio
+DSCP Marking for video
+Emergency Call
+IMS Emergency Call over LTE
+IMS Emergency call over WiFi
+Conference
+IMS Conference call
+Max number of participants supports for a conference call.
+Conference factory URI
+CEP(Conference Event Package) support
+Use Dialog when Conference call
+SMS/MMS
+SMS over IMS (over LTE)
+PhoneContextURI
+APN for MMS over cellular
+SMS over IMS over Wi-Fi
+MMS over WiFi via ePDG
+APN for MMS over WiFi via ePDG
+IP version (v4 or v6) for MMS APN
+USSD
+USSD over IMS
+Supplementary Service
+Ut / XCAP over cellular NW
+APN for Ut / XCAP over cellular NW
+IP version (v4 or v6) for Ut/XCAP APN over cellular NW
+IP version (v4 or v6) in roaming NW for Ut/XCAP APN over cellular NW
+Ut / XCAP over Wi-Fi / ePDG
+APN for Ut / XCAP over Wi-Fi / ePDG
+IP version (v4 or v6) for Ut/XCAP APN over Wi-Fi / ePDG
+GBA Authentication
+User name for Ut / XCAP server (If using HTTP digest)
+Password for Ut / XCAP server (If using HTTP digest)
+DomainName and port number
+XCAP protocol(http or https)
+ApplicationUID
+GBA BSF server url and port
+GBA access protocol
+Ut / XCAP support in roaming NW.
+Ut / XCAP support while data setting is disabled.
+Ut / XCAP support only when IMS registered
+Media tag
+Video Telephony 
+ViLTE (Video over LTE)
+ViWiFi (Video over WiFi)
+Allow video call when mobile data off
+CVO
+video_media_profile_mode
+H.264 resolution
+H.264 profile level
+H.264 min frame rate 
+H.264 max frame rate
+H.264 min bit rate 
+H.264 max bit rate
+H.265
+Video telephony for emergency call
+Video telephony for conference call
+Video capability handling when mobile data is disabled 
+Roaming
+ViLTE (Video over LTE)
+ViWiFi (Video over WiFi)
+Allow video call when mobile data off
+Video telephony for conference call
+VoLTE in roaming NW
+VoWiFi in roaming NW
+"Default setting of VoWifi preferred network mode
+in roaming (VPLMN)"
+UI Requirements
+"Show Enable VoLTE setting
+(""1-A"" in UI Standard Spec sheet)"
+Enable VoLTE setting default value
+"Show HD icon on in call screen.
+(""1-F"" in UI Standard Spec sheet)"
+"Show HD icon on call log.
+(""1-G"" in UI Standard Spec sheet)"
+"Show VoLTE icon in ongoing call screen
+(""1-C"" in UI Standard Spec sheet)"
+"Show VoLTE icon on status bar
+(""1-B"" in UI Standard Spec sheet)"
+"Show ""Manage Conference"" button during IMS Conference call
+(""1-E"" in UI Standard Spec sheet)"
+"Show make ViLTE initiating call in Phonebook
+(""1-D"" in UI Standard Spec sheet)"
+"Show Call preference setting.
+(""2-B"" in UI Standard Spec sheet)"
+"Default setting of Call preference setting in home network.
+(""2-B"" in UI Standard Spec sheet)"
+"VoWiFi icon
+(""2-C"" in UI Standard Spec sheet)"
+"SPN display as format of ""<SPN> + Wi-Fi Calling"" when UE registered VoWiFi.
+(""2-D"" in UI Standard Spec sheet)"
+Others
+Non-standardized requirements
+"Show Enable VoLTE setting
+(""1-A"" in UI Standard Spec sheet)"
+Enable VoLTE setting default value
+"Show HD icon on in call screen.
+(""1-F"" in UI Standard Spec sheet)"
+"Show HD icon on call log.
+(""1-G"" in UI Standard Spec sheet)"
+"Show VoLTE icon in ongoing call screen
+(""1-C"" in UI Standard Spec sheet)"
+"Show VoLTE icon on status bar
+(""1-B"" in UI Standard Spec sheet)"
+"Show ""Manage Conference"" button during IMS Conference call
+(""1-E"" in UI Standard Spec sheet)"
+"Show make ViLTE initiating call in Phonebook
+(""1-D"" in UI Standard Spec sheet)"
+"Show Call preference setting.
+(""2-B"" in UI Standard Spec sheet)"
+"Default setting of Call preference setting in home network.
+(""2-B"" in UI Standard Spec sheet)"
+"VoWiFi icon
+(""2-C"" in UI Standard Spec sheet)"
+"SPN display as format of ""<SPN> + Wi-Fi Calling"" when UE registered VoWiFi.
+(""2-D"" in UI Standard Spec sheet)"
+
+
+
+
+
+
+
+
+
+
+
+
+
