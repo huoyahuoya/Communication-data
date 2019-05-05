@@ -111,6 +111,3 @@ MSISDN：Mobile Station International ISDN Number是指主叫用户为呼叫数�
 CC：国家码
 NDC：国内目的地码，即网络接入码，平时手机拨号的前三位。
 SN：用户号码，采用等长8位编号计划。
-
-
-待学习：主叫被叫切换

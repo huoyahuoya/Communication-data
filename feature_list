@@ -50,6 +50,7 @@ APN for IMS:
 APN for internet
 IP version (v4 or v6) in roaming NW for Internet APN:IMS APN漫游控制
 PDN connectivity to be established during initial LTE attach：
+(公用数据网:PDN--Public Data Network)
 	需要指定LTE连接过程中应建立哪些PDN连接。
 	-IMS APN的PDN
 	-用于Internet APN的PDN
@@ -62,7 +63,14 @@ Should UE specify APN during initial LTE attach：
 	如果选择了“ue should not specify”，则ue将不指定apn=>esm将把esm信息标志设置为false，并且不会包含在附加请求中。
 	但如果上层显示需要加密的PCO，ESM会将ESM信息标志设置为真。
 Authentication:认证，AKA/Digest，两种UE鉴权方式。
+
 IPSec：Internet Protocol Security（互联网安全协议 ），是一个协议包，透过对IP协议的分组进行加密和认证来保护IP协议的网络传输协议族（一些相互关联的协议的集合）。
+IPsecurity是一套完整的加密系统
+	IPsec-VPN提供三个特性：
+		authentication  每一个IP包的认证
+		data integrity  验证数据完整性，保证在传输过程中没有被人为改动
+		confidentiality（私密性）数据包的加密
+
 
 [SIP]
 SIP Transport Protocol:SIP（Session Initiation Protocol，会话初始协议）是由IETF（Internet Engineering Task Force，因特网工程任务组）制定的多媒体通信协议。
@@ -76,10 +84,123 @@ SessionExpires (UAC / UAS)：会话扩展（UAC/UAS），SIP协议采用Client/S
 	用户代理服务器-UAS（User Agent Server），用于接收请求。
 SessionExpires (RefresherMethod INVITE / UPDATE)：
 SIP registration expiry timer：SIP注册到期计时器（3GPP TS24.229）。
-Privacy type：
+
 Check P-Asserted-Identity header in SIP 380 Alternate Service：
+Tips:
+	主叫号码显示限制业务属于主叫侧业务。
+	主叫用户开通了该业务的情况下，在呼叫建立过程中，被叫用户将不能显示主叫用户号码。
+	在被叫用户为超越类用户（如警察等），即使主叫用户开通该业务，号码也将显示在被叫用户终端上。
+
+UE_A发送Invite请求，协带P-Preferred-Identity头域，希望给被叫显示自身标识信息
+2-3）P-CSCF收到Invite请求后，检查P-Preferred-Identity头域针对当前用户是合法公有标识，将P-Preferred-Identity头域标识去除，添加P-Asserted-Identity头域，该头域值从之前P-Preferred-Identity头域中复制。之后将Invite请求向上转发。
+4-5）AS判断主叫用户UE-A是否签约主叫识别限制（OIR）业务。若签约该业务则添加
+Privacy：id头域，并将From头域设置为Anonymous，将Invite请求发往被叫侧。
+6）P-CSCF检查到含有Privacy：id头域，则将P-Asserted-Identity头域删除，之后将Invite请求转发给UE_B。
+END）被叫UE_B收到Invite请求后，检查是否含有P-Asserted-Identity头域，如果没有该头域，则检测是否有Privacy：id头域，如果存在则进行匿名显示处理，如果即没有P-Asserted-Identity头域，又没有Privacy：id头域，则进行异常显示处理。
+
+https://wenku.baidu.com/view/b325e43b482fb4daa58d4b92.html
+https://wenku.baidu.com/view/1b16a85a336c1eb91a375d78.html
 
 [Call Handing]
+Codec:在移动设备中，Codec的作用可以归结为4种，分别是：
+1.对PCM等信号进行D/A转换，把数字的音频信号转换为模拟信号
+2.对Mic、Linein或者其他输入源的模拟信号进行A/D转换，把模拟的声音信号转变CPU能够处理的数字信号
+3.对音频通路进行控制，比如播放音乐，收听调频收音机，又或者接听电话时，音频信号在codec内的流通路线是不一样的
+4.对音频信号做出相应的处理，例如音量控制，功率放大，EQ控制等等
+https://www.jianshu.com/p/359e150ff517
+
+amr nb和wb的帧结构
+全称Adaptive Multi-Rate，自适应多速率编码，主要用于移动设备的音频，压缩比比较大，但相对其他的压缩格式质量比较差，由于多用于人声，通话，效果还是很不错的。
+
+EVS音频编码器
+新一代的语音频编码器,它的开发是3GPP在Release 12期间一项非常重要的工作,也是语音频编码国际标准化方面的一个重点项目,它可以在5.9kbps至128kbps的码率范围内工作,不仅对于语音和音乐信号都能够提供非常高的音频质量,而且还具有很强的抗丢帧和抗延时抖动的能力,可以为用户带来全新的体验。
+
+[ePDG Parameters]
+ePDG：Evolevd Packet Data Gateway,演进型分组数据网关
+
+IKEv2:是IPsec的一部分，主要进行相互认证、建立和维护安全关联。
+IPsec组成:
+IPsec协议集包括三个协议：
+①internet keyexchange(IKE)密匙交换协议
+在两个对等体之间建立一条遂道来完成密钥交换，协商完成再用下面的方法封装数据。
+IKE动态的，周期性的在两个PEER之间更新密钥
+②encapsulating secutitypayload(ESP)封装安全负载
+可以对数据包认证，加密，封装，IP中协议号-50，通常使用3DES来进行加密
+③authentication header(AH)
+只提供认证，封装，不提供加密，明文传送，IP中协议号-51
+https://blog.csdn.net/dongfei2033/article/details/78046879
+
+
+[Emergency Call]
+IMS Emergency Call over LTE 	:通过LTE进行IMS紧急呼叫
+IMS Emergency call over WiFi 	:IMS通过WiFi紧急呼叫
+
+
+[Conference]
+IMS Conference call:IMS电话会议
+Max number of participants supports for a conference call:最多参与者支持电话会议
+Conference factory URI:会议工厂URI
+CEP(Conference Event Package) support:CEP（会议活动包）支持
+Use Dialog when Conference call:电话会议时使用Dialog
+
+[SMS/MMS]
+SMS over IMS (over LTE):基于IMS的SMS（通过LTE）
+PhoneContextURI:选取网络URI
+APN for MMS over cellular:APN用于MMS的蜂窝网络
+SMS over IMS over Wi-Fi:通过Wi-Fi通过IMS发送短信
+MMS over WiFi via ePDG:通过ePDG通过WiFi进行彩信
+APN for MMS over WiFi via ePDG:通过ePDG通过WiFi进行MMS的APN
+IP version (v4 or v6) for MMS APN:用于MMS APN的IP版本（v4或v6）
+
+[USSD]
+USSD over IMS:
+USSD（Unstructured Supplementary Service Data）即非结构化补充数据业务，是一种新型基于GSM网络的交互式数据业务。 当你使用手机键盘输入一些网络已预先制定的数字或者符号比如*#等，再按send也就是拨号键就可以向网络发送一条指令，网络根据你的指令选择你需要的服务提供给你。
+与短消息、GPRS和WAP相比较，其在工业应用上的可行性及优点，并以中电五十所成功运营在乌鲁木齐的无线远程监控系统为例，讲述了USSD在工业应用中的系统结构、接口协议和通信流程。
+
+
+[Supplementary Service]补充服务
+Ut / XCAP over cellular NW:
+APN for Ut / XCAP over cellular NW:
+IP version (v4 or v6) for Ut/XCAP APN over cellular NW:IP版本（v4或v6）用于Ut / XCAP APN over cellular NW
+IP version (v4 or v6) in roaming NW for Ut/XCAP APN over cellular NW:漫游NW中的IP版本（v4或v6），用于通过蜂窝NW的Ut / XCAP APN
+Ut / XCAP over Wi-Fi / ePDG:
+APN for Ut / XCAP over Wi-Fi / ePDG:通过Wi-Fi / ePDG进行Ut / XCAP的APN
+IP version (v4 or v6) for Ut/XCAP APN over Wi-Fi / ePDG:通过Wi-Fi / ePDG的Ut / XCAP APN的IP版本（v4或v6）
+GBA Authentication:GBA认证
+User name for Ut / XCAP server (If using HTTP digest):Ut / XCAP服务器的用户名（如果使用HTTP摘要）
+Password for Ut / XCAP server (If using HTTP digest):Ut / XCAP服务器的密码（如果使用HTTP摘要）
+DomainName and port number:域名和端口号
+XCAP protocol(http or https):XCAP协议（http或https）
+ApplicationUID:
+GBA BSF server url and port:GBA BSF服务器URL和端口
+GBA access protocol:GBA访问协议
+Ut / XCAP support in roaming NW:漫游NW中的Ut / XCAP支持
+Ut / XCAP support while data setting is disabled:禁用数据设置时支持Ut / XCAP
+Ut / XCAP support only when IMS registered:仅在IMS注册时才支持Ut / XCAP
+
+Ut协议：一套基于UDP虚拟多连接可靠传输，采用无中心自组网和可校验分块传输的一种全新的文件快速发布的P2P文件传输协议。
+UT P2P协议有如下特点：
+UT协议，采用了国际标准RFC959中出现的被动和主动连接模式，采用虚拟通道方式，可以实现单端口65535个虚拟连接，节省端口资源开销。UT协议，使用分块带校验传输，在传输层，数据层，协议层使用三级校验，防止数据差错效率高于TCP协议。
+UT协议，支持协议层无中心自动组网。
+UT协议，支持数据流压缩传输。
+UT协议，自动根据网络负载调整并发包数量，并支持广播通知和退出通知。
+UT协议，支持P2P流自动转换成标准FTP流，支持P2P流播放。
+该协议目前最新版本是2.0,并在PhoenixP2P等软件中得到应用.
+
+XCAP:如名字所示，XCAP 是一种配置访问协议。它使用 XML 文档格式来存储应用程序的配置数据，允许客户端读取、写入及修改配置数据。
+	XCAP映射 XML 文档的子树和元素属性到 HTTP URL ，所以这些组件可以通过 HTTP 直接获取。 XCAP 是一种映射 XML 文档和文档属性到 HTTP URL 的一种惯例，一个资源的修改如何影响其他资源的规则，数据验证的约束，访问资源时相关的授权策略。因为这种结构，普通 HTTP 能够用来操作数据。 XCAP 很大长度上借鉴了Application Configuration Access Protocol （ ACAP ），但它不是 ACAP 的扩展，也不依赖 ACAP 。像 ACAP 一样， XCAP 支持多种应用程序配置的需要，而不只是一种。
+
+GBA：通用引导架构（GBA）是一种技术，它使用户的认证。认证的前提是用户拥有HLR（归属位置寄存器）或HSS（归属用户服务器）的效身份认证。 
+	GBA是在3GPP标准化。用户认证是由一个共享的密钥，和另一个在智能卡的实体，例如在移动电话内的SIM卡，另一个是在HLR / HSS。
+	GBA通过使网络组件挑战智能卡，并验证该答案是一个由HLR / HSS预测验证。
+	代替要求服务提供商信任BSF和依靠它为每一个认证请求时，BSF建立卡贴卡和服务提供者之间的共享秘密。这个共享秘密在时间和用于特定域的限制。
+
+BSF：Bean Scripting Framework（BSF）是一个支持在Java应用程序内调用脚本语言 (Script)，并且支持脚本语言直接访问Java对象和方法的一个开源项目。
+有了它 , 你就能在java application中使用javascript, Python, XSLT, Perl, tcl, ……等一大堆scripting language. 反过来也可以，就是在这些scripting language中调用任何已经注册过了的JavaBean,java object。它提供了完整的API实现通过Java访问脚本语言的引擎。
+GSMA：GSMA代表全球移动运营商的共同关注和权益。横跨220多个国家，GSMA连结着全球更广泛的移动生态系统中近800家移动运营商，以及250多家企业，其中包括手机制造商，软件公司，设备供应商，互联网公司，以及金融、医疗、交通和公共事业等行业组织。GSMA还举办业界领先的活动，如世界移动通信大会及亚洲移动通信博览会。
+
+NW
+
 
 
 [Video Telephony ]
