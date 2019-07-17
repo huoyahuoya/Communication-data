@@ -156,3 +156,34 @@ GGSN（Gateway GPRS Support Node，GPRS网关支持节点）
 
 PSDN：分组交换数据网络，分组交换是为适应计算机通信而发展起来的一种先进通信手段，它以CCITTX.25建议为基础，可以满足不同速率、不同型号终端与终端、终端与计算机、计算机与计算机间以及局域网间的通信，实现数据库资源共享。
 分组交换网是数据通信的基础网，利用其网络平台可以开发各种增值业务，如：电子信箱、电子数据交换、可视图文、传真存储转发、数据库检索。
+
+RAT：radio access technology 无线接入技术
+RAT：Radio Access Type 无线接入类型
+
+RLF：为Radio Link Failure	无线链路失败。
+RLF：为Reverse Link			FIFO先入先出反向链路。
+
+EPS：LTE网络统称
+ESM：LTE会话管理——PDN激活，会话相关
+EMM：LTE移动管理——手机（位置）移动（注册LTE，小区移动——移动过程中相关）
+
+RNC:（无线网络控制器,Radio Network Controller）
+
+网络承载
+2G网络中，RAN以TDM承载;
+3G网络中，RAN以ATM承载。
+4G网络中，
+
+RAN：无线接入网（Radio Access Network）
+TDM：时分复用（Time-division multiplexing）,采用同一物理连接的不同时段来传输不同的信号，也能达到多路传输的目的.
+ATM：异步传输模式（Asynchronous Transfer Mode），就是建立在电路交换和分组交换的基础上的一种新的交换技术。
+
+PTN（分组传送网，Packet Transport Network）是指这样一种光传送网络架构和具体技术：
+	在IP业务和底层光传输媒质之间设置了一个层面，它针对分组业务流量的突发性和统计复用传送的要求而设计，以分组业务为核心并支持多业务提供，
+		具有更低的总体使用成本（TCO），
+		同时秉承光传输的传统优势，
+		包括高可用性和可靠性、
+		高效的带宽管理机制和流量工程、
+		便捷的OAM和网管、
+		可扩展、
+		较高的安全性等。

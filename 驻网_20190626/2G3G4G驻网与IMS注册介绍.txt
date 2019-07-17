@@ -1,0 +1,146 @@
+2G3G4G驻网与IMS注册介绍
+
+通常手机从开机到能够做业务，需要经历三个过程：
+1.PLMN selection
+2.cell selection
+3.location registration
+
+只有手机的状态转为registered后，才能接收paging或者主动发起业务（CS/PS）。
+1.PLMN selection
+	对于使用中的手机，会在存储器里有一些PLMN ID，比如上次驻留的RPLMN。在自动选网模式下，开机时搜索PLMN的顺序则是非接入层NAS决定先搜索RPLMN。
+将搜索结果上报到NAS，一旦选择了该PLMN，就开始在这个PLMN上搜索suitable cell
+
+2.Cell selection
+	搜索的时候最先搜索Suitable cell，找不到再搜acceptable cell, 他们需满足几项规则，在3GPP 25.304中有详细描述。
+小区选择可分为三步走：
+	时隙同步，
+	帧同步，
+	码组鉴别(捕获主扰码:PSC:Primary scrambling code)。
+找到PSC(primary synchronization code，主同步码的含义，用于小区同步)后，手机的状态变成camped(终端还没有完成attach之前的状态)。
+
+3.location registration
+经过了前面的步骤，获取了小区的PSC，就可以去接收这个PSC下面的SCCPCH上面去接收系统信息。
+(SCCPCH辅公共控制信道，上面配置有PCH（寻呼信道）和FACH（前向接入信道）)
+接收到系统信息后手机开始在这个PLMN上发起位置登记，让网络知道手机的位置，方便以后手机得到网络的服务。
+位置登记有几种手段，常见的网络中用的是Location Update和Attach。
+注册成功后，手机的状态转为registered。如果注册失败，可以根据失败原因进行其他操作，比如小区重选，PLMN重选等。
+
+23G驻网
+Step 1: MM (GMM) initialized LU REQ (CS) and ATTACH REQ (PS)
+Step 2: RRC Connection Setup Procedure (RR connection in 2G)
+Step 3: MM and GMM common procedure
+Step 4: LU (CS) result & ATTACH (PS) result by network 
+
+//select 23G PLMN--23G驻网
+PS 904699 7806119 12:17:24:779 NWSEL – MM MSG_ID_NWSEL_MM_PLMN_SEARCH_REQ 
+PS 904732 7806126 12:17:24:779 CSCE_FDD - CSE_FDD MSG_ID_FDD_CSCE_CSE_CELL_SELECTION_START_REQ
+PS 919961 8234434 12:17:52:346 CSE_FDD - CSCE_FDD MSG_ID_FDD_CSCE_CSE_CELL_SELECTION_CNF
+PS 919994 8234439 12:17:52:346 MM – NWSEL MSG_ID_NWSEL_MM_PLMN_SEARCH_CNF
+result = PLMN_FOUND (enum 1)
+
+失败时候，一般可以查看PLMN_SEARCH_CNF中的result是否为PLMN_NOT_FOUND
+
+
+
+Tip:
+	RRC（Radio Resource Control）是指无线资源控制
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+
+Step 1: MM(GMM) initialized LU REQ (CS) and ATTACH REQ (PS)
+If LU REQ or ATTACH REQ does not appear in the NAS message:
+Reason: Error may exist in SIM card or no coverage for this PLMN
+步骤1:mm（gmm）初始化lu req（cs）和attach req（ps）
+如果NAS消息中没有出现LU REQ或ATTACH REQ：
+原因：SIM卡中可能存在错误或此PLMN没有覆盖范围
+
+
+Step 2: RRC Connection Setup Procedure (or RR connection in 2G)
+After UE sends LU REQ or ATTACH REQ, the RRC connection (AS) should be established successfully. In a normal case, the following three AS messages will be shown. If the RRC connection (AS) is failed to be established:
+Reason: 可能信号太弱，或者网络拒绝或此连接已被释放
+步骤2:RRC连接设置程序（或2G中的RR连接）
+当UE发送LU REQ或ATTACH REQ后，应成功建立RRC连接（AS）。在正常情况下，将显示以下三条AS消息。如果无法建立RRC连接（AS）：
+原因：可能信号太弱，或者网络拒绝或此连接已被释放
+
+
+Step 3: MM and GMM common procedure
+After network (NW) receives LU REQ or ATTACH REQ, it will query the identities of UE (IMEI, IMSI etc.) and authenticate legality of USIM(SIM) Card. If NW sends Authentication Reject to UE, perform the following actions:
+Reason: Network sends out authentication rejection which is due to temporary errors, or the USIM Card is unbalanced
+步骤3:MM和GMM通用程序
+网络（NW）接收到LU REQ或ATTACH REQ后，查询UE（IMEI、IMSI等）的身份，并对USIM（SIM）卡的合法性进行认证。
+如果nw向ue发送身份验证拒绝，请执行以下操作：
+原因：由于暂时错误，网络发出认证拒绝，或者USIM卡不平衡 
+
+
+Step 4: LU (CS) result and ATTACH (PS) result by network
+Finally, the UE will receive LU ACCEPT and ATTACH ACCEPT which are sent by NW, if NW accepts the register request. If NW sends LU REJECT or ATTACH REJECT with different cause values, the behavior of UE is also different according to 3GPP TS 24.008
+步骤4:lu（cs）结果并通过网络附加（ps）结果
+最后，如果nw接受注册请求，则ue将接收由nw发送的lu accept和attach accept。
+如果nw发送带有不同原因值的lu reject或attach reject，根据3gpp ts 24.008，ue的行为也不同。 
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+
+4G驻网
+//select 4G PLMN
+PS 719664 7552371 12:17:08:575 EVAL - EMM MSG_ID_EVAL_EMM_PLMN_SEARCH_REQ
+PS 725806 7556522 12:17:08:977 EMM - EVAL MSG_ID_EVAL_EMM_PLMN_SEARCH_CNF result = PLMN_FOUND (enum 1)
+失败时候，一般可以查看PLMN_SEARCH_CNF中的result是否为PLMN_NOT_FOUND
+{REQ|CNF}	请求／响应
+
+
+
+Step 1: Initialize PDN CONN REQ/Attach REQ 		初始化PDN CONN REQ/ATTACH REQ
+Step 2: RRC Connection Setup Procedure 			RRC连接设置程序
+Step 3: EMM Common Procedure 					EMM通用程序
+Step 4: PDN Activation Result Judgment by NW 	用nw判断pdn激活结果
+Step 5: Attach Result Judgment by UE 			附加结果判断
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+
+
+Step 1: Initialize PDN CONN REQ/Attach REQ
+Before UE starts to send the first NAS message (PDN CONN REQ/Attach REQ ) of Attach Procedure, UE needs to make sure that all conditions and material are ready to perform the Attach action. If the primitive “MSG_ID_ESMREG_PDN_CONN_EST_REQ” or NAS message (PDN CONN REQ/Attach REQ) is not shown:
+Reason: The test phone cannot find a suitable cell to camp on
+步骤1：初始化PDN CONN REQ/ATTACH REQ
+在UE开始发送附加程序的第一个NAS消息（PDN CONN REQ/ATTACH REQ）之前，UE需要确保所有条件和材料都准备好执行附加操作。
+如果“msg_id_esmreg_pdn_conn_est_req”或NAS消息（pdn conn req/attach req）字段未显示：
+原因：测试电话找不到合适的小区驻留
+
+
+Step 2: RRC Connection setup procedure
+Before UE starts to send the first NAS message (Attach Request) of the Attach Procedure, UE needs to make sure that it establishes RRC Connection successfully
+  Reason: The signal can be too weak, or this connection is rejected or released by the network
+步骤2：RRC连接建立过程
+在UE开始发送附着过程的第一NAS消息（附着请求）之前，UE需要确保它成功建立RRC连接
+   原因：信号可能太弱，或者此连接被网络拒绝或释放
+{
+	ERRC_RRCConnectionRequest
+	ERRC_RRCConnectionSetupComplete
+}
+
+问题：NAS消息在哪呢？
+
+
+Step 3: EMM Common procedure
+After UE sends the first NAS message (Attach Request) of Attach Procedure, NW will query the identities of UE (IMEI, IMSI, etc.) and authenticate the legality of USIM Card. If NW sends Authentication Reject to UE, perform the following actions:
+Reason: NW sends out authentication rejection which is due to temporary errors, or the USIM Card is not unbalanced 
+第3步：EMM常用程序
+在UE发送附着过程的第一NAS消息（Attach Request）之后，NW将查询UE的身份（IMEI，IMSI等）并验证USIM卡的合法性。 如果NW向UE发送Authentication Reject，请执行以下操作：
+原因：NW发出由于临时错误导致的身份验证拒绝，或者USIM卡不是不平衡的
+
+
+Step 4: PDN Activation Result Judgment by NW
+After UE finishes executing the EMM Common procedure, NW will decide whether UE successfully activates PDN. If the message “Activate Default EPS Bearer Context Request” from NW is not found, or UE receives the message “PDN CONN Reject”, perform the following actions:
+Reason: NW try to reject activation request of PDN due to temporary errors or UE configuration errors
+步骤4：NW的PDN激活结果判断
+在UE完成执行EMM公共过程之后，NW将决定UE是否成功激活PDN。 如果未找到来自NW的消息“激活默认EPS承载上下文请求”，或者UE收到消息“PDN CONN Reject”，请执行以下操作：
+原因：NW尝试拒绝由于临时错误或UE配置错误导致的PDN激活请求
+{
+	Activate Default EPS Bearer Context REQUEST
+	Activate Default EPS Bearer Context ACCEPT
+}
+
+Step 5: Attach Result Judgment by UE
+After UE finishes executing the EMM Common procedure, NW will decide whether UE is allowed to access network. If NW sends Attach Reject to UE, perform the following actions:
+Reason: NW sends Attach Reject due to temporary errors or NW configuration errors 
+步骤5：UE附加结果判断
+在UE完成执行EMM公共过程之后，NW将决定是否允许UE接入网络。 
+如果NW向UE发送Attach Reject，请执行以下操作：
+原因：NW由于临时错误或NW配置错误而发送附着拒绝

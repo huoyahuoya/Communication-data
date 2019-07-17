@@ -1,0 +1,81 @@
+https://wenku.baidu.com/view/63c9ee59b9f3f90f77c61b50.html
+
+开机上电
+｜
+初始化
+｜
+PLMN选择
+｜
+扫频
+｜
+小区搜索
+｜
+解系统消息
+｜
+小区选择
+｜
+小区驻留
+｜
+Attach Request
+|
+RRC CONNECTION request
+｜
+随机接入
+｜
+RRC CONNECTION setup
+|
+RRC CONNECTION setup complete
+|
+Attach accept
+|
+Attach complete
+
+
+
+１.初始化:
+	sim卡识别		：HPLMNwAcT,OPLMNwAcT,PLMNwAcT,FPLMNwAcT,EPLMNwAcT
+	搜网相关NV项读取	：接入技术．搜网模式，服务域选取，历史频点信息，LTE频点信息系
+
+２.PLMN选择：
+	自动搜网，优先级　RPLMN>HPLMN>UPLMN>OPLMN
+	手动搜网，将可用不可用的PLMN全部列出来选择
+	没有可用PLMN，MMR_REG_REQ PLMN(0-0) RAT(LTE)
+
+3.LTE扫频
+	system scan	:扫描历史频点
+	band scan	:历史频点失败后，开始每个Band的扫描
+
+4.小区扫描
+	实际上就是PSS(Primary Synchronization Signal)/SSS(Secondary Synchronization Signal)同步，实现小区的识别和下行同步
+
+5.解系统消息
+	MIB Master Information Block:天线数，下行带宽．小区ID,注册的频点等
+	SIB System Information Block:PLMN,小区ID，S准则中的q-RxLevMin(sib3)等，与第二步匹配上才能进入下一步，否则扫下一个频点．
+
+6.小区选择
+	基于S准则的判断：满足UE要求的信号强度，继续下一步，否则扫下一个频点（完成选择进入下一步）
+
+７．小区驻留
+	该频点满足S准则，选择后驻留
+		Camped after cell selection
+
+8.Attach Request
+	驻留完成后，UE要注册到网络就要发起Attach request
+
+9.RRC CONNECTION request
+	发起Attach Request请求后，若要传输信令就要建立RRC连接，所以发起RRC连接请求．
+
+10.随机接入
+	RRC建立需要进行上行同步(随即接入)
+	随机接入又分：
+	(1)竞争
+		a.从RRC_IDLE状态接入
+		b.Radio Link Failure无线链路失败后的RRC重建
+		c.UE处于RRC_CONNECTED时有上行数据要发送
+	(2)非竞争
+		a.切换过程的随即接入
+		b.UE处于RRC_CONNECTED时有下行数据要到达
+
+11.RRC连接建立
+
+12.Attach accept/Attach complete
