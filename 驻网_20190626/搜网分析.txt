@@ -1,0 +1,6 @@
+plmn search分为
+(1)Stored only
+(2)Full　band Search
+
+步骤１
+当手机上电时，PLMN搜索类型为，NWSEL尝试搜索最高优先级（RPLMN和HPLMN）

@@ -1,0 +1,46 @@
+IMS承载控制和计费控制
+
+https://wenku.baidu.com/view/2bd79db02dc58bd63186bceb19e8b8f67d1cef65.html
+
+3GPP R5定义的承载控制和计费控制
+
+	在IMS回话建立时，UE通过SDP协议　为实时业务,非实时业务请求相应的媒体参数（编码方案，媒体类型，带宽等）．
+	IMS会话根据用户的个人业务，媒体信息以及所应用的本地资源控制，进行相应媒体参数的授权．
+	所授权的参数返回给用户终端为建立传输承载作资源预留．
+	IMS网络和接入网络相互独立．IMS会话控制并不直接控制传输承载网络的资源分配，这需要在IMS[会话层]和[传输承载层]建立一套交互机制．
+
+应用层
+表示层
+会话层
+传输层
+网络层
+数据链路层
+物理层
+
+Bearer Service
+
+[IP承载管理器（IP BS Manager）]
+	用标准的IP机制来管理IP承载业务,
+		IPBS在UE中是可选的，
+		在GGSN是必须的，
+	它通过翻译功能与UMTS承载管理器进行通信，
+	提供　IP承载业务　和　UMTS承载业务　的互通。
+
+	UMTS(Universal Mobile Telecommunications System),通用移动通信系统.
+		这是一个完整的3G移动通信技术标准，UMTS并不仅限于定义空中接口。
+		除WCDMA作为首选空中接口技术获得不断完善外，UMTS还相继引入了TD-SCDMA和HSDPA技术。
+		UMTS有时也叫3GSM，强调结合了3G技术而且是GSM标准的后续标准。
+		UMTS分组交换系统是由GPRS系统所演进而来，故系统的架构颇为相像。
+
+[PDF 策略控制功能]
+	PDF采用标准的IP机制实现在承载层中的基于业务的本地策略控制。
+
+[IMS会话层与传输承载层的联接]
+	Go接口作为联接，从而实现了本地的QoS策略控制从IMS会话层映射到传输层。
+		在IMS网络中
+		PDF  是PDP----策略决定点PDP(Policy Decision Point)
+		GGSN 是PEP----策略执行点PEP(Policy Enforcement Point)
+
+[翻译/映射功能]
+	不同机制和不同参数之间的互通。
+

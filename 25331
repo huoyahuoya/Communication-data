@@ -1,0 +1,126 @@
+5.1	RRC功能（Radio Resource Control是指无线资源控制）
+
+rrc执行下面列出的功能。有关这些功能的更详细说明，请参见：
+-与非接入层（核心网）有关的信息广播；
+-与接入层相关的信息广播；
+-在ue和utran之间建立、维护和释放rrc连接;
+	(UTRAN:UMTS的Terrestrial Radio Access Network 陆地无线接入网)
+	(UMTS:Universal Mobile Telecommunications System,通用移动通信系统)
+-无线电承载器的建立、重构和释放；
+-p-t-m无线电承载器的建立、重新配置和释放；
+-为rrc连接分配、重新配置和释放无线电资源；
+-rrc连接移动性函数；
+-请求的Qos控制(Qos:Quality of Service，服务质量)；
+-ue计量报告和报告控制；
+-外环功率控制；
+-加密控制；
+-Slow DCA（TDD模式）；
+-Paging；
+-小区初始化和小区重选；
+-上行链路DCH上的无线资源仲裁(DCH：适用于TDD模式的增强专用信道 EnhancedDedicatedChannel)；
+-rrc消息完整性保护；
+-定时提前（TDD模式）；
+-CBS控制（Cell Broadcast Service 小区广播业务 ）；
+-MBMS控制（Multimedia Broadcast Multicast Service　多媒体广播多播业务）。
+
+
+5.2	向上层提供RRC服务
+
+rrc向上层提供以下服务，这些服务的描述和原语在[2]和[17]中提供。
+-一般控制；
+-通知；
+-专用控制。
+rrc层提供到上层的信令连接的ue-utran部分，以支持上层的信息流的交换。在用户设备和核心网之间使用信令连接来传输上层信息。对于每个核心网络域，最多可以同时存在一个信令连接。rrc层在单个rrc连接上映射一个ue的信令连接。对于信令连接上的上层数据传输，rrc层支持区分两个不同的类，称为“高优先级”（对应于基于gsm-map的核心网络的“sapi 0”）和“低优先级”（对应于基于gsm-map的核心网络的“sapi 3”）。
+
+
+
+
+5.3 RRC与上层之间的原语
+
+rrc和上层之间的原语在[17]中描述。
+
+
+
+6:较低层的服务
+
+6.1	预期来自层2的服务
+
+第2层提供的服务在[2]、[15]和[16]中描述。
+
+6.2	预期来自层1的服务
+
+第1层提供的服务在[2]中描述。 
+
+6.3信令无线电承载
+可用于发送RRC消息的无线电承载（RB）被定义为“信令无线电承载”，并在下面进行了指定。 UE和UTRAN应在DCCH和CCCH上使用RLC-TM，RLC-UM或RLC-AM为RRC消息选择信令无线电承载，
+（Dedicated Control CHannel 专用控制信道）
+（Common Control Channel 公共控制信道）
+内容如下：
+-信令无线电承载RB0必须用于在CCCH上发送的所有消息（UL：RLC-TM，DL：RLC-UM）。
+-当使用RLC未确认模式（RLC-UM）时，应将信令无线电承载 RB1 用于在DCCH上发送的所有消息。
+-当使用RLC确认模式（RLC-AM）时，信令无线电承载RB2将用于在DCCH上发送的所有消息，但携带高层（NAS）信令的RRC消息和携带IE“应用层”的MEASUREMENT REPORT消息除外测量报告”。
+-信令无线承载RB3和可选的信令无线承载RB4应用于载有更高层（NAS）信令的RRC消息，并在第8.1.8。，8.1节中规定的以RLC确认模式（RLC-AM）在DCCH上发送.9和8.1.10。
+-信令无线电承载RB4将用于UE信息响应消息和带有IE“应用层测量报告”的MEASUREMENT REPORT消息。
+-另外，其身份应设置在5到32之间的RB可以用作以RLC透明模式（RLC-TM）发送的DCCH上的RRC消息的信令无线承载。
+-SHCCH上的RRC消息使用TM映射到上行链路中的RACH或USCH上，使用RLC-UM映射到FACH或DSCH上。这些消息仅在TDD模式下指定。
+-使用RLC-UM将MCCH上的RRC消息映射到FACH上。 MCCH的传输信道配置在BCCH上指示。对于该信令无线电承载，不应用身份。
+-使用RLC-UM在MACH上映射MSCH上的RRC消息。 MSCH的传输信道配置在MCCH上指示。对于该信令无线电承载，不应用身份。
+
+用于在FACH上发信号通知无线电承载RB0，SHCCH，BCCH，在PCH上PCCH，映射到BCH的BCCH，映射到HS-DSCH的RB0（仅FDD）和映射到HS-DSCH的RACH，BCCH的无线电承载配置（FDD和1.28 Mcps TDD仅在第13.6、13.6a，13.6b和13.6节中指定了映射到HS-DSCH的PCCH（仅FDD和1.28 Mcps TDD）和映射到HS-DSCH和普通E-DCH的RB0（仅FDD和1.28 Mcps TDD）。 c，13.6e，13.6f，13.6g和13.6h。
+加密从未应用于信令无线承载RB0或使用RLC TM的信令无线承载。
+
+
+7	Protocol states
+
+7.1 rrc状态和状态转换概述，包括gsm和e-utra
+
+图7.1-1显示了UTRA RRC连接模式下的RRC状态，
+包括用于CS域服务的UTRA RRC连接模式和GSM连接模式之间的转换，
+以及用于CS域服务的UTRA RRC连接模式
+和GSM / GPRS分组模式或E-UTRA RRC连接模式之间的转换,
+PS域服务.
+它还显示了空闲模式和UTRA RRC连接模式之间的转换，以及UTRA RRC连接模式内的转换。
+
+7.2 UE模式/状态下的进程
+注意：本节规定了在不同的RRC模式/状态下，UE中应激活哪些进程。相关程序及其触发条件在第8节或相关过程定义中的其他位置中指定。
+
+7.2.1 UE空闲模式
+在[4]中指定了在UE空闲模式下活动的UE进程。
+除非UE正在通过p-t-m无线电承载接收MBMS服务，否则UE将按照[25]中的规定，对更高优先级的PLMN执行定期搜索。
+配置记录的测量后，UE应存储[4]中规定的可用测量结果。
+当配置了已记录的ANR测量时，UE应按照[4]中的规定执行ANR测量和记录。
+能够在条款8.1.1.6.3中规定的以MBSFN模式工作的小区上接收MBMS服务的UE在空闲模式下工作，并且独立于从MBSFN模式工作的小区接收的RRC消息和从该小区接收的系统信息进行操作单元不能以MBSFN模式运行。这意味着，除非另有明确说明，否则基于从以MBSFN模式操作的小区接收的消息和系统信息执行的过程不应与从不以MBSFN模式操作的小区接收的消息和系统信息交互。
+注1：这意味着UE正在运行一个独立的堆栈，以便在8.1.1.6.3节规定的以MBSFN模式工作的小区上接收MBMS服务。
+注2：对于1.28 Mcps TDD，如果小区工作在MBSFN模式下，则系统信息和MCCH消息在MBSFN特殊时隙[30]上传输。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

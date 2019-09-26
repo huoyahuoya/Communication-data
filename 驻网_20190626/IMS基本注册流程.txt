@@ -1,0 +1,27 @@
+1.UE进行Attach，建立QCI=9的默认承载，并使用IMS APN建立PDN连接；
+2.建立QCI=5的默认承载，用于传送SIP信令；
+3.UE通过QCI=5的默认承载向P-CSCF发起注册请求；
+4.P-CSCF通过HSS获知用户信息不在数据库中，便向终端代理回送401 Unauthorized 质询信息，其中包含安全认证所需的令牌；
+5.终端将用户标识和密码根据安全认证令牌加密后，再次用REGISTER消息报告给P-CSCF服务器；
+6.P-CSCF将REGISTER 消息中的用户信息解密，验证其合法后，IMS核心网将该用户信息登记到数据库中，并向终端返回成功响应消息200 OK；
+7.用户向IMS发送订阅注册事件SUBSCRIBE；
+8.服务器应答200 OK，表示订阅成功；
+9.IMS服务器发送NOTIFY消息，由于订阅的用户已经注册，所以IMS服务器回应NOTIFY消息中，状态为active，同时携带XML信息；
+10.终端发送200 OK表示接收成功；
+
+
+
+
+
+IMS Register Flow--IMS注册主要流程如下(参考Qcom)：
+
+1.LTE attach
+2.CM和DS向DPL广播能力
+3.DPL向各IMS client广播网络能力
+4.PM/RM 广播 DPL 建立IMS APN连接
+5.IMS Clients 发起创建DCM profile请求
+6.建立PDP连接
+7.RM选择P-CSCF
+8.RM获取注册所需的参数
+9.发起SIP注册
+10.广播注册状态
