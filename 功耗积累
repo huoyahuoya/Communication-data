@@ -1,0 +1,11 @@
+1.电流：语音，数据，待机电流三者构成
+2.无OTA Message，说明没有PDP连接，没有数据业务（CC__CONNECT_ACKNOWLEDGE 通话接通后 下一份Modem log）
+3.语音电流受以下三者影响：
+	信号强度：PS Find "RSCP":WCDMA信号强弱
+	建立的承载：FDD_RRC__RADIO_BEARER_SETUP：rb-InformationSetupList: 3 items，建立三条承载
+	语音编码方式：
+		1.当前支持：OTA Find "CC__CALL_CONFIRMED"
+		2.当前使用：0x0006
+
+
+<6>[  192.325815] -(0)[3135:PhotonicModulat][SPM] suspend wake up by  R12_EINT_EVENT_B, timer_out = 174018, r13 = 0xc604012c, debug_flag = 0x191300 0x0, r12 = 0x41, r12_ext = 0x0, raw_sta = 0x0, idle_sta = 0x97f,  req_sta =  0x420000e8, event_reg = 0x90100000, isr = 0x0, raw_ext_sta = 0x80069095, wake_misc = 0x10000, pcm_flag = 0x80080 0x40, req = 0x0, wlk_cntcv_l = 0xa383996d, wlk_cntcv_h = 0x0, 26M_off_pct = 0
